@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Navigation />
     <div class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-menu">
         <div class="navbar-start">
@@ -41,12 +42,14 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Signup from "@/components/Signup.vue";
 import Login from "@/components/Login.vue";
+import Navigation from "@/components/Navigation.vue";
 import { APIConfig } from "@/utils/api.utils";
 
 @Component({
   components: {
     Signup,
-    Login
+    Login,
+    Navigation
   }
 })
 export default class App extends Vue {
