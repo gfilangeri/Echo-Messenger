@@ -21,23 +21,29 @@
 
         <md-list>
           <md-list-item>
-            <router-link to="/chat" exact-active-class="is-active" >
-              <md-icon>chat_bubble</md-icon>
-            </router-link>
+            <md-button class="md-icon-button md-dense">
+              <router-link to="/chat" exact-active-class="is-active" >
+                <md-icon>chat_bubble</md-icon>
+              </router-link>
+            </md-button>
             <span class="md-list-item-text">Messages</span>
           </md-list-item>
 
           <md-list-item>
-            <router-link to="/contacts" exact-active-class="is-active">
-              <md-icon>perm_contact_calendar</md-icon>
-            </router-link>
+            <md-button class="md-icon-button md-dense">
+              <router-link to="/contacts" exact-active-class="is-active">
+                <md-icon>perm_contact_calendar</md-icon>
+              </router-link>
+            </md-button>
             <span class="md-list-item-text">Contacts</span>
           </md-list-item>
 
           <md-list-item>
-            <router-link to="/myProfile" exact-active-class="is-active">
-              <md-icon>account_circle</md-icon>
-            </router-link>
+            <md-button class="md-icon-button md-dense">
+              <router-link to="/my-profile" exact-active-class="is-active">
+                <md-icon>account_circle</md-icon>
+              </router-link>
+            </md-button>
             <span class="md-list-item-text">Profile</span>
           </md-list-item>
         </md-list>
@@ -86,6 +92,10 @@ export default {
 }
 .is-active {
   color: red;
+  text-decoration: underline;
+}
+router-link{
+    text-decoration: none;
 }
 // Demo purposes only
 .md-drawer {
