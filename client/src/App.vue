@@ -1,109 +1,95 @@
 <template>
-  <div id="app">
-    <Navigation />
-    <div class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-menu">
-        <div class="navbar-start">
-          <router-link class="navbar-item is-tab" to="/" exact-active-class="is-active">Home</router-link>
-          <router-link class="navbar-item is-tab" to="/about" exact-active-class="is-active">About</router-link>
-        </div>
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-primary" v-if="!isLoggedIn" v-on:click="showSignupModal()">
-                <strong>Sign up</strong>
-              </a>
-              <router-link
-                class="button is-text"
-                v-if="isLoggedIn"
-                to="/my-profile"
-                exact-active-class="is-active"
-              >My Profile</router-link>
-              <a class="button is-light" v-if="!isLoggedIn" v-on:click="showLoginModal()">Log in</a>
-              <a class="button is-light" v-if="isLoggedIn" v-on:click="logout">Log out</a>
-            </div>
+  <div class="page-container">
+    <md-app>
+      <md-app-toolbar class="md-primary" md-elevation="0">
+        <md-button class="md-icon-button" @click="toggleMenu" v-if="!menuVisible">
+          <md-icon>menu</md-icon>
+        </md-button>
+        <span class="md-title">My Title</span>
+      </md-app-toolbar>
+
+      <md-app-drawer :md-active.sync="menuVisible" md-persistent="mini">
+        <md-toolbar class="md-transparent" md-elevation="0">
+          <span>Navigation</span>
+
+          <div class="md-toolbar-section-end">
+            <md-button class="md-icon-button md-dense" @click="toggleMenu">
+              <md-icon>keyboard_arrow_left</md-icon>
+            </md-button>
           </div>
-        </div>
-      </div>
-    </div>
-    <router-view class="container"/>
-    <Signup
-      v-bind:is-showing="showSignup"
-      v-on:success="successSignup()"
-      v-on:cancel="cancelSignup()"
-    />
-    <Login v-bind:is-showing="showLogin" v-on:success="successLogin()" v-on:cancel="cancelLogin()"/>
+        </md-toolbar>
+
+        <md-list>
+          <md-list-item>
+            <router-link to="/chat" exact-active-class="is-active" >
+              <md-icon>chat_bubble</md-icon>
+            </router-link>
+            <span class="md-list-item-text">Messages</span>
+          </md-list-item>
+
+          <md-list-item>
+            <router-link to="/contacts" exact-active-class="is-active">
+              <md-icon>perm_contact_calendar</md-icon>
+            </router-link>
+            <span class="md-list-item-text">Contacts</span>
+          </md-list-item>
+
+          <md-list-item>
+            <router-link to="/myProfile" exact-active-class="is-active">
+              <md-icon>account_circle</md-icon>
+            </router-link>
+            <span class="md-list-item-text">Profile</span>
+          </md-list-item>
+        </md-list>
+      </md-app-drawer>
+
+      <md-app-content>
+        <router-view class="container"/>
+      </md-app-content>
+    </md-app>
   </div>
 </template>
 
-<script lang="ts">
-import axios from "axios";
+<script>
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
-import Signup from "@/components/Signup.vue";
-import Login from "@/components/Login.vue";
-import Navigation from "@/components/Navigation.vue";
-import { APIConfig } from "@/utils/api.utils";
+//import 'vue-material/dist/vue-material.min.css';
+import { MdApp, MdDrawer, MdToolbar, MdButton, MdIcon, MdList, MdContent } from "vue-material/dist/components";
+import MenuIcon from "vue-material-design-icons/Menu.vue"
 
-@Component({
-  components: {
-    Signup,
-    Login,
-    Navigation
-  }
-})
-export default class App extends Vue {
-  public showSignup: boolean = false;
-  public showLogin: boolean = false;
+Vue.use(MdApp);
+Vue.use(MdDrawer);
+Vue.use(MdToolbar);
+Vue.use(MdButton);
+Vue.use(MdIcon);
+Vue.use(MdList);
+Vue.use(MdContent);
+Vue.component("menu-icon", MenuIcon);
 
-  showSignupModal() {
-    this.showSignup = true;
+export default {
+  name: "PersistentMini",
+  data: () => ({
+    menuVisible: false
+  }),
+  methods: {
+    toggleMenu() {
+      this.menuVisible = !this.menuVisible;
+    }
   }
-
-  successSignup() {
-    this.showSignup = false;
-  }
-
-  cancelSignup() {
-    this.showSignup = false;
-  }
-
-  showLoginModal() {
-    this.showLogin = true;
-  }
-
-  successLogin() {
-    this.showLogin = false;
-  }
-
-  cancelLogin() {
-    this.showLogin = false;
-  }
-
-  get isLoggedIn(): boolean {
-    return !!this.$store.state.user;
-  }
-
-  logout() {
-    axios
-      .post(APIConfig.buildUrl("/logout"), null, {
-        headers: { token: this.$store.state.userToken }
-      })
-      .then(() => {
-        this.$store.commit("logout");
-        this.$router.push({ name: "home" });
-      });
-  }
-}
+};
 </script>
 
-
-<style lang="scss">
-@import "~bulma/css/bulma.css";
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+<style lang="scss" scoped>
+//@import "~bulma/css/bulma.css";
+.md-app {
+  min-height: 350px;
+  border: 1px solid rgba(#000, 0.12);
+}
+.is-active {
+  color: red;
+}
+// Demo purposes only
+.md-drawer {
+  width: 230px;
+  max-width: calc(100vw - 125px);
 }
 </style>

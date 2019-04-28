@@ -21,23 +21,20 @@
 
         <md-list>
           <md-list-item>
-            <md-icon>move_to_inbox</md-icon>
-            <span class="md-list-item-text">Inbox</span>
+            <router-link to="/chat" exact-active-class="is-active">
+              <md-icon>chat_bubble</md-icon>
+            </router-link>
+            <span class="md-list-item-text">Messages</span>
           </md-list-item>
 
           <md-list-item>
-            <md-icon>send</md-icon>
-            <span class="md-list-item-text">Sent Mail</span>
+            <md-icon>perm_contact_calendar</md-icon>
+            <span class="md-list-item-text">Contacts</span>
           </md-list-item>
 
           <md-list-item>
-            <md-icon>delete</md-icon>
-            <span class="md-list-item-text">Trash</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>error</md-icon>
-            <span class="md-list-item-text">Spam</span>
+            <md-icon>account_circle</md-icon>
+            <span class="md-list-item-text">Profile</span>
           </md-list-item>
         </md-list>
       </md-app-drawer>

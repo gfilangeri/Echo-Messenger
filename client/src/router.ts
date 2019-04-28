@@ -3,6 +3,8 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import ToDos from "./views/ToDos.vue";
 import MyProfile from "./views/MyProfile.vue";
+import Chat from "./views/Chat.vue";
+import Contacts from "./views/Contacts.vue";
 
 Vue.use(Router);
 
@@ -33,6 +35,16 @@ export default new Router({
       path: "/my-profile",
       name: "myProfile",
       component: MyProfile
+    },
+    {
+      path: "/chat",
+      name: "chat",
+      component: Chat
+    },
+    {
+      path: "/contacts",
+      name: "contacts",
+      component: Contacts
     }
   ]
 });
