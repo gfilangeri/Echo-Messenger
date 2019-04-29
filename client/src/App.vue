@@ -21,29 +21,23 @@
 
         <md-list>
           <md-list-item>
-            <md-button class="md-icon-button md-dense">
-              <router-link to="/chat" exact-active-class="is-active" >
+            <router-link to="/chat" tag="li" class="nav_button">
                 <md-icon>chat_bubble</md-icon>
-              </router-link>
-            </md-button>
+            </router-link>
             <span class="md-list-item-text">Messages</span>
           </md-list-item>
 
           <md-list-item>
-            <md-button class="md-icon-button md-dense">
-              <router-link to="/contacts" exact-active-class="is-active">
-                <md-icon>perm_contact_calendar</md-icon>
-              </router-link>
-            </md-button>
+            <router-link to="/contacts" tag="li">
+                <md-icon class="nav_button">perm_contact_calendar</md-icon>
+            </router-link>
             <span class="md-list-item-text">Contacts</span>
           </md-list-item>
 
           <md-list-item>
-            <md-button class="md-icon-button md-dense">
-              <router-link to="/my-profile" exact-active-class="is-active">
-                <md-icon>account_circle</md-icon>
-              </router-link>
-            </md-button>
+            <router-link to="/my-profile" tag="li">
+                <md-icon class="nav_button">account_circle</md-icon>
+            </router-link>
             <span class="md-list-item-text">Profile</span>
           </md-list-item>
         </md-list>
@@ -59,8 +53,16 @@
 <script>
 import Vue from "vue";
 //import 'vue-material/dist/vue-material.min.css';
-import { MdApp, MdDrawer, MdToolbar, MdButton, MdIcon, MdList, MdContent } from "vue-material/dist/components";
-import MenuIcon from "vue-material-design-icons/Menu.vue"
+import {
+  MdApp,
+  MdDrawer,
+  MdToolbar,
+  MdButton,
+  MdIcon,
+  MdList,
+  MdContent
+} from "vue-material/dist/components";
+import MenuIcon from "vue-material-design-icons/Menu.vue";
 
 Vue.use(MdApp);
 Vue.use(MdDrawer);
@@ -82,21 +84,25 @@ export default {
     }
   }
 };
+
 </script>
 
 <style lang="scss" scoped>
 //@import "~bulma/css/bulma.css";
 .md-app {
   min-height: 350px;
-  border: 1px solid rgba(#000, 0.12);
+  //border: 1px solid rgba(#000, 0.12);
 }
-.is-active {
+.nav_button {
+  color: black;
+}
+.nav_button:active {
+  color: green;
+}
+.nav_button:hover {
   color: red;
-  text-decoration: underline;
 }
-router-link{
-    text-decoration: none;
-}
+
 // Demo purposes only
 .md-drawer {
   width: 230px;
