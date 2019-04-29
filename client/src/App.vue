@@ -5,7 +5,7 @@
         <md-button class="md-icon-button" @click="toggleMenu" v-if="!menuVisible">
           <md-icon>menu</md-icon>
         </md-button>
-        <span class="md-title">My Title</span>
+        <span class="md-title">Echo Messenger</span>
       </md-app-toolbar>
 
       <md-app-drawer :md-active.sync="menuVisible" md-persistent="mini">
@@ -20,36 +20,32 @@
         </md-toolbar>
 
         <md-list>
-           <router-link to="/chat" tag="li">
-          <md-list-item @click="changeActive(0)"> 
-              <md-icon
-                v-if="chatActive"
-                class="nav_button_active"
-              >chat_bubble</md-icon>
-              <md-icon
-                v-if="!chatActive"
-                class="nav_button"
-              >chat_bubble</md-icon>
-            
-            <span class="md-list-item-text">Messages</span>
-          </md-list-item>
+          <router-link to="/chat" tag="li">
+            <md-list-item @click="changeActive(0)">
+              <md-icon v-if="chatActive" class="nav_button_active">chat_bubble</md-icon>
+              <md-icon v-if="!chatActive" class="nav_button">chat_bubble</md-icon>
+
+              <span class="md-list-item-text">Messages</span>
+            </md-list-item>
           </router-link>
 
-<router-link to="/contacts" tag="li">
-          <md-list-item  @click="changeActive(1)">
-              <md-icon class="nav_button">perm_contact_calendar</md-icon>
-            <span class="md-list-item-text">Contacts</span>
-          </md-list-item>
+          <router-link to="/contacts" tag="li">
+            <md-list-item @click="changeActive(1)">
+              <md-icon v-if="contactsActive" class="nav_button_active">perm_contact_calendar</md-icon>
+              <md-icon v-if="!contactsActive" class="nav_button">perm_contact_calendar</md-icon>
+              <span class="md-list-item-text">Contacts</span>
+            </md-list-item>
           </router-link>
 
-<router-link to="/my-profile" tag="li">
-          <md-list-item  @click="changeActive(2)">
-              <md-icon class="nav_button">account_circle</md-icon>
-            <span class="md-list-item-text">Profile</span>
-          </md-list-item>
+          <router-link to="/my-profile" tag="li">
+            <md-list-item @click="changeActive(2)">
+              <md-icon v-if="profileActive" class="nav_button_active">account_circle</md-icon>
+              <md-icon v-if="!profileActive" class="nav_button">account_circle</md-icon>
+              <!-- <md-icon class="nav_button">account_circle</md-icon> -->
+              <span class="md-list-item-text">Profile</span>
+            </md-list-item>
           </router-link>
         </md-list>
-        
       </md-app-drawer>
 
       <md-app-content>
@@ -94,7 +90,7 @@ export default {
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
     },
-          changeActive(num) {
+    changeActive(num) {
       if (num == 0) {
         this.chatActive = true;
         this.contactsActive = false;
@@ -113,8 +109,8 @@ export default {
       console.log(this.chatActive);
       console.log(this.contactsActive);
       console.log(this.profileActive);
+    }
   }
-  },
 };
 // export default class App extends Vue {
 //   menuVisible: Boolean = false;
