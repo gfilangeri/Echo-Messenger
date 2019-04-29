@@ -57,7 +57,6 @@
 
 <script>
 import Vue from "vue";
-//import 'vue-material/dist/vue-material.min.css';
 import {
   MdApp,
   MdDrawer,
@@ -67,7 +66,6 @@ import {
   MdList,
   MdContent
 } from "vue-material/dist/components";
-import MenuIcon from "vue-material-design-icons/Menu.vue";
 
 Vue.use(MdApp);
 Vue.use(MdDrawer);
@@ -76,7 +74,6 @@ Vue.use(MdButton);
 Vue.use(MdIcon);
 Vue.use(MdList);
 Vue.use(MdContent);
-Vue.component("menu-icon", MenuIcon);
 
 export default {
   name: "PersistentMini",
@@ -93,6 +90,7 @@ export default {
     }
   }
 };
+
 </script>
 
 <style lang="scss" scoped>
