@@ -64,7 +64,10 @@ import {
   MdButton,
   MdIcon,
   MdList,
-  MdContent
+  MdContent,
+  MdSubheader,
+  MdDivider,
+  MdAvatar
 } from "vue-material/dist/components";
 
 Vue.use(MdApp);
@@ -74,6 +77,9 @@ Vue.use(MdButton);
 Vue.use(MdIcon);
 Vue.use(MdList);
 Vue.use(MdContent);
+Vue.use(MdSubheader);
+Vue.use(MdDivider);
+Vue.use(MdAvatar);
 
 export default {
   name: "PersistentMini",
@@ -96,7 +102,7 @@ export default {
 <style lang="scss" scoped>
 //@import "~bulma/css/bulma.css";
 .md-app {
-  min-height: 350px;
+  min-height: 1000px;
   //border: 1px solid rgba(#000, 0.12);
 }
 .nav_button {
@@ -114,4 +120,13 @@ export default {
   width: 230px;
   max-width: calc(100vw - 125px);
 }
+
+.viewport {
+    width: 320px;
+    max-width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    overflow: auto;
+    border: 1px solid rgba(#000, .12);
+  }
 </style>
