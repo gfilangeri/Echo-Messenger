@@ -17,8 +17,8 @@
       </div>
       <div class="message-form">
         <input v-model="newMessage">
+        <button v-on:click="sendMessage">send</button>
       </div>
-      <button v-on:click="sendMessage">send</button>
     </div>
   </div>
 </template>
@@ -154,6 +154,8 @@ export default {
   border-top: 1px solid #e0e2e4;
   margin: 10px;
   padding: 20px 15px;
+    bottom: 0;
+  position: fixed;
 }
 .message-form input {
   width: calc(100% - 50px);
@@ -161,4 +163,5 @@ export default {
   font-size: 16px;
   margin-top: 5px;
 }
+
 </style>
