@@ -1,7 +1,10 @@
 <template>
   <div>
     <md-toolbar :md-elevation="1">
-      <span class="md-title">Chats</span>
+      <span class="md-title">
+        Chats
+        <button v-on:click="createChat"></button>
+      </span>
     </md-toolbar>
     <div class="viewport">
       <md-list class="md-double-line">
@@ -23,8 +26,10 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from "vue";
+import axios, { AxiosResponse, AxiosError } from "axios";
+import { APIConfig } from "@/utils/api.utils";
 export default {
   name: "MessagePreviews",
   data: () => ({
@@ -41,7 +46,40 @@ export default {
       { id: 6, title: "Roomies pt. 5" }
     ]
   }),
-  methods: {}
+  methods: {
+    getChats() {
+      axios
+        .get(APIConfig.buildUrl("/chat"))
+        .then((response: AxiosResponse) => {
+          this.chats = response.data;
+          console.log("success");
+          this.$emit("success");
+        })
+        .catch((res: AxiosError) => {
+          console.log("[MessagePreviews.vue]");
+        });
+    },
+    createChat() {
+      console.log;
+      axios
+        .post(APIConfig.buildUrl("/chat"), {
+          group: 0,
+          title: "Gina"
+        })
+        .then((response: AxiosResponse) => {
+          console.log(
+            "[MessagePreviews.vue] new chat" + JSON.stringify(response.data)
+          );
+          this.chats.push(response.data);
+        })
+        .catch((response: AxiosResponse) => {
+          console.log("[MessagePreviews.vue] chat error");
+        });
+    }
+  },
+  created() {
+    this.getChats();
+  }
 };
 </script>
 
