@@ -4,7 +4,7 @@
         <p v-if="message.user==1" class="right">{{message.message}}</p>
         <p v-else class="left">{{message.message}}</p>
     </div>
-    <textarea v-model="newMessage" ></textarea>
+    <input v-model="newMessage" />
     <button v-on:click="send">send</button>
   </div>
 </template>
