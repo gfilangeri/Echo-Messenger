@@ -1,60 +1,81 @@
 <template>
-<div class="container">
-  <div class="message-content">
-    <div class="message-content__item" v-for="(message, index) in messages" v-bind:key="index">
-      <div v-if="message.user==1">
-        <div class="outgoing">
-          <div class="box-text">{{message.message}}</div>
-          <div class="time">{{getDate(message.date)}}</div>
+  <div class="container">
+    <div class="message-content">
+      <div class="message-content__item" v-for="(message, index) in messages" v-bind:key="index">
+        <div v-if="message.user==1">
+          <div class="outgoing">
+            <div class="box-text">{{message.message}}</div>
+            <div class="time">{{getDate(message.date)}}</div>
+          </div>
+        </div>
+        <div v-else>
+          <div class="incoming">
+            <div class="box-text">{{message.message}}</div>
+            <div class="time">{{getDate(message.date)}}</div>
+          </div>
         </div>
       </div>
-      <div v-else>
-        <div class="incoming">
-          <div class="box-text">{{message.message}}</div>
-          <div class="time">{{getDate(message.date)}}</div>
-        </div>
+      <div class="message-form">
+        <input v-model="newMessage">
       </div>
+      <button v-on:click="sendMessage">send</button>
     </div>
-    <div class="message-form">
-      <input v-model="newMessage">
-    </div>
-    <button v-on:click="send">send</button>
-  </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from "vue";
-import moment from 'moment'
+import moment from "moment";
+import axios, { AxiosResponse, AxiosError } from "axios";
+import { APIConfig } from "@/utils/api.utils";
 export default {
   name: "Message",
   data: () => ({
-    messages: [
-      { id: 1, message: "hi", user: 2, date: Date.now(), chatId: 1 },
-      { id: 2, message: "hello", user: 2, date: Date.now(), chatId: 1 },
-      { id: 3, message: "hey", user: 1, date: Date.now(), chatId: 1 },
-      { id: 4, message: "what", user: 2, date: Date.now(), chatId: 1 },
-      { id: 5, message: "is", user: 2, date: Date.now(), chatId: 1 },
-      { id: 6, message: "up", user: 1, date: Date.now(), chatId: 1 }
-    ],
-    newMessage: ""
+    messages: [],
+    newMessage: "",
+    chatId: 1,
+    userId: 1
   }),
   methods: {
-    send() {
-      this.messages.push({
-        id: 7,
-        message: this.newMessage,
-        user: 1,
-        date: Date.now(),
-        chatId: 1
-      });
-      this.newMessage = "";
-      return;
+    getDate(date: Date) {
+      const formattedDate = moment(date).format("hh:mm");
+      return formattedDate;
     },
-    getDate(date) {
-        const formattedDate = moment(date).format('hh:mm')
-        return formattedDate;
+    getMessages() {
+      axios
+        .get(APIConfig.buildUrl("/messages/" + this.chatId))
+        .then((response: AxiosResponse) => {
+          this.messages = response.data;
+          console.log("success");
+          this.$emit("success");
+        })
+        .catch((res: AxiosError) => {
+          console.log("[Message.vue]");
+        });
+    },
+    sendMessage() {
+      console.log;
+      axios
+        .post(APIConfig.buildUrl("/message"), {
+          date: new Date(),
+          message: this.newMessage,
+          chatId: this.chatId,
+          userId: this.userId
+        })
+        .then((response: AxiosResponse) => {
+          console.log(
+            "[Message.vue] new message" + JSON.stringify(response.data)
+          );
+          this.newMessage = "";
+          this.messages.push(response.data);
+        })
+        .catch((response: AxiosResponse) => {
+          console.log("[Message.vue] message error");
+        });
     }
+  },
+  created() {
+    this.getMessages();
   }
 };
 </script>
