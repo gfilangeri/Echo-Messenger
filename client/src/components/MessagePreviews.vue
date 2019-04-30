@@ -49,7 +49,7 @@ export default {
 .viewport {
   width: 320px;
   max-width: 100%;
-  // max-height: 400px;
+  max-height: 500px;
   display: inline-block;
   vertical-align: top;
   overflow-y: scroll;
