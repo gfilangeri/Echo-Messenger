@@ -75,7 +75,9 @@ export default {
     },
     
   },
-  created() {
+  mounted() {
+    console.log(this.$route.params.chatId)
+    this.chatId = Number(this.$route.params.chatId);
     this.getMessages();
   }
 };

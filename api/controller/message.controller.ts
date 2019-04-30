@@ -3,7 +3,7 @@ import DefaultController from "./default.controller";
 import { Request, Response } from "express";
 import express from "express";
 
-import { Message } from "../entity";
+import { Message, Chat } from "../entity";
 
 import { getRepository } from "typeorm";
 
@@ -11,6 +11,7 @@ export class MessageController extends DefaultController {
     protected initializeRoutes(): express.Router {
         const router = express.Router();
         const messageRepo = getRepository(Message);
+        const chatRepo = getRepository(Chat);
 
         router.route("/message").post((req: Request, res: Response) => {
             console.log("--- SENDING MESSAGE ---");
