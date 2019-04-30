@@ -2,7 +2,7 @@
   <div class="container">
     <div class="message-content">
       <div class="message-content__item" v-for="(message, index) in messages" v-bind:key="index">
-        <div v-if="message.user==1">
+        <div v-if="message.userId==1">
           <div class="outgoing">
             <div class="box-text">{{message.message}}</div>
             <div class="time">{{getDate(message.date)}}</div>
