@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-chat-scroll>
     <div class="message-content">
       <div class="message-content__item" v-for="(message, index) in messages" v-bind:key="index">
         <div v-if="message.userId==1">
@@ -72,7 +72,8 @@ export default {
         .catch((response: AxiosResponse) => {
           console.log("[Message.vue] message error");
         });
-    }
+    },
+    
   },
   created() {
     this.getMessages();
@@ -81,6 +82,25 @@ export default {
 </script>
 
 <style scoped>
+.page{
+ overflow-y: scroll;
+
+ width:150px;
+ height:150px;
+ transform:rotateX(180deg);
+                -moz-transform:rotateX(180deg); /* Mozilla */
+                -webkit-transform:rotateX(180deg); /* Safari and Chrome */
+                -ms-transform:rotateX(180deg); /* IE 9+ */
+                -o-transform:rotateX(180deg); /* Opera */
+}
+.sub{
+   transform:rotateX(180deg);
+                -moz-transform:rotateX(180deg); /* Mozilla */
+                -webkit-transform:rotateX(180deg); /* Safari and Chrome */
+                -ms-transform:rotateX(180deg); /* IE 9+ */
+                -o-transform:rotateX(180deg); /* Opera */
+}
+
 .container {
     align-self: center;
     position: fixed;
@@ -97,8 +117,9 @@ export default {
   width: 100%;
   height: 100%;
   float: center;
+  
   /* position: relative; */
-  line-height: 5px;
+  /*line-height: 5px;*/
   /* margin-left: 15px;*/
 }
 .incoming {
@@ -121,11 +142,12 @@ export default {
   font-size: 16px;
   color: #535357;
   border-radius: 7px;
-  max-width: 90%;
+  max-width: 60%;
   margin-top: 10px;
   text-align: left;
   position: relative;
   margin-bottom: 20px;
+  word-wrap: break-word;
 }
 
 .outgoing .box-text {
@@ -136,17 +158,25 @@ export default {
   font-size: 16px;
   color: #535357;
   border-radius: 7px;
-  max-width: 90%;
+  max-width: 60%;
   margin-top: 10px;
   text-align: left;
   position: relative;
   margin-bottom: 20px;
+  word-wrap: break-word;
 }
-.box-text .time {
-  position: absolute;
+.outgoing .time {
+  
   bottom: -25px;
   font-size: 13px;
   color: #939397;
+  margin-top: -18px;
+}
+.incoming .time {
+  bottom: -25px;
+  font-size: 13px;
+  color: #939397;
+  margin-top: -18px;
 }
 
 .message-form {
