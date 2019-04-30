@@ -5,6 +5,7 @@ import ToDos from "./views/ToDos.vue";
 import MyProfile from "./views/MyProfile.vue";
 import Chat from "./views/Chat.vue";
 import Contacts from "./views/Contacts.vue";
+import Message from "./components/Message.vue";
 
 Vue.use(Router);
 
@@ -39,7 +40,14 @@ export default new Router({
     {
       path: "/chat",
       name: "chat",
-      component: Chat
+      component: Chat,
+      children: [
+        {
+          path: "/message/:chatId",
+          name: "message",
+          component: Message
+        }
+      ]
     },
     {
       path: "/contacts",

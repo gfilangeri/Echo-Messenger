@@ -9,7 +9,8 @@
     <div class="viewport">
       <md-list class="md-double-line">
         <div v-for="(chat, index) in chats" v-bind:key="index">
-          <md-button>
+          <router-link :to="{ name: 'message', params: { chatId: chat.id } }">
+          <md-button v-on:click="displayChat(chat.id)">
             <md-list-item class="chat_section">
               <md-icon>group</md-icon>
               <span>
@@ -17,6 +18,7 @@
               </span>
             </md-list-item>
           </md-button>
+          </router-link>
           <div class="divider">
             <md-divider></md-divider>
           </div>
@@ -33,18 +35,7 @@ import { APIConfig } from "@/utils/api.utils";
 export default {
   name: "MessagePreviews",
   data: () => ({
-    chats: [
-      { id: 1, title: "Gina" },
-      { id: 2, title: "Shannon" },
-      { id: 3, title: "Emma" },
-      { id: 4, title: "Emily" },
-      { id: 5, title: "Ben" },
-      { id: 6, title: "Roomies pt. 5" },
-      { id: 6, title: "Roomies pt. 5" },
-      { id: 6, title: "Roomies pt. 5" },
-      { id: 6, title: "Roomies pt. 5" },
-      { id: 6, title: "Roomies pt. 5" }
-    ]
+    chats: []
   }),
   methods: {
     getChats() {
@@ -60,7 +51,6 @@ export default {
         });
     },
     createChat() {
-      console.log;
       axios
         .post(APIConfig.buildUrl("/chat"), {
           group: 0,
@@ -75,6 +65,9 @@ export default {
         .catch((response: AxiosResponse) => {
           console.log("[MessagePreviews.vue] chat error");
         });
+    },
+    displayChat(chatId: Number) {
+      console.log("displaying chat #" + chatId)
     }
   },
   created() {

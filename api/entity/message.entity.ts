@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Chat } from "./chat.entity";
 @Entity()
 export class Message {
   @PrimaryGeneratedColumn()
@@ -13,6 +14,7 @@ export class Message {
   @Column()
   public userId!: number;
 
+  @ManyToOne(()=>Chat, (chat)=>chat.id)
   @Column()
   public chatId!: number;
 }
