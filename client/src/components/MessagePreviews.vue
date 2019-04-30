@@ -1,11 +1,25 @@
 <template>
   <div>
+    <md-toolbar :md-elevation="1">
+      <span class="md-title">Chats</span>
+    </md-toolbar>
     <div class="viewport">
-      <md-toolbar :md-elevation="1">
-        <span class="md-title">Chats</span>
-      </md-toolbar>
-
       <md-list class="md-double-line">
+
+        <md-list-item v-for="(chat, index) in chats" v-bind:key="index">
+          <md-icon>group</md-icon>
+          <span>
+            <md-subheader>{{chat.title}}</md-subheader>
+          </span>
+        </md-list-item>
+
+        <md-list-item>
+          <md-icon>group</md-icon>
+          <span>
+            <md-subheader>Roomies Pt.5</md-subheader>
+          </span>
+        </md-list-item>
+
         <md-button>
           <md-list-item>
             <md-icon>group</md-icon>
@@ -14,6 +28,7 @@
             </span>
           </md-list-item>
         </md-button>
+
 
         <div class="divider">
           <md-divider></md-divider>
@@ -30,18 +45,11 @@
         <div class="divider">
           <md-divider></md-divider>
         </div>
-        <md-button>
-          <md-list-item>
-            <md-icon>group</md-icon>
-            <span>
-              <md-subheader>Ben</md-subheader>
-            </span>
-          </md-list-item>
-        </md-button>
 
         <div class="divider">
           <md-divider></md-divider>
         </div>
+
         <md-button>
           <md-list-item>
             <md-icon>group</md-icon>
@@ -51,9 +59,11 @@
           </md-list-item>
         </md-button>
 
+
         <div class="divider">
           <md-divider></md-divider>
         </div>
+
         <md-button>
           <md-list-item>
             <md-icon>group</md-icon>
@@ -63,9 +73,11 @@
           </md-list-item>
         </md-button>
 
+
         <div class="divider">
           <md-divider></md-divider>
         </div>
+
         <md-button cstyle="text-align:left">
           <md-list-item>
             <md-icon>group</md-icon>
@@ -75,9 +87,11 @@
           </md-list-item>
         </md-button>
 
+
         <div class="divider">
           <md-divider></md-divider>
         </div>
+
         <md-button>
           <md-list-item>
             <md-icon>group</md-icon>
@@ -87,9 +101,11 @@
           </md-list-item>
         </md-button>
 
+
         <div class="divider">
           <md-divider></md-divider>
         </div>
+
         <md-button>
           <md-list-item>
             <md-icon>group</md-icon>
@@ -99,9 +115,11 @@
           </md-list-item>
         </md-button>
 
+
         <div class="divider">
           <md-divider></md-divider>
         </div>
+
         <md-button>
           <md-list-item>
             <md-icon>group</md-icon>
@@ -110,6 +128,7 @@
             </span>
           </md-list-item>
         </md-button>
+
       </md-list>
     </div>
   </div>
@@ -119,7 +138,16 @@
 import Vue from "vue";
 export default {
   name: "MessagePreviews",
-  data: () => ({}),
+  data: () => ({
+    chats: [
+      { id: 1, title: "Gina" },
+      { id: 2, title: "Shannon" },
+      { id: 3, title: "Emma" },
+      { id: 4, title: "Emily" },
+      { id: 5, title: "Ben" },
+      { id: 6, title: "Roomies pt. 5" }
+    ]
+  }),
   methods: {}
 };
 </script>
@@ -128,9 +156,10 @@ export default {
 .viewport {
   width: 320px;
   max-width: 100%;
+  max-height: 400px;
   display: inline-block;
   vertical-align: top;
-  overflow: auto;
+  overflow-y: scroll;
   border: 1px solid rgba(#000, 0.12);
 }
 
