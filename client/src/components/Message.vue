@@ -82,8 +82,15 @@ export default {
 
 <style scoped>
 .container {
-  border-style: solid;
-  padding: 10px;
+    align-self: center;
+    position: fixed;
+    min-height: 600px;
+    max-height: 600px;
+    min-width: 800px;
+    max-width: 800px;
+    border-style: double;
+    padding: 10px;
+    overflow-y: scroll;
 }
 .message-content {
   border-radius: 7px;
