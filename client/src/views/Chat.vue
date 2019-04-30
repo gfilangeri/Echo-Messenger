@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="screen">
     <div class="md-layout">
-      <div class="md-layout-item md-size-20"><MessagePreviews/></div>
+      <div class="md-layout-item md-size-20 scroll"><MessagePreviews/></div>
       <div class="md-layout-item"><Message/></div>
     </div>
   </div>
@@ -40,5 +40,14 @@ export default class Chat extends Vue {}
   &:nth-child(2) {
     border: 1px black;
   }
+}
+
+.scroll{
+    overflow: scroll;
+    min-height: 625px;
+}
+
+.screen{
+    overflow: hidden;
 }
 </style>

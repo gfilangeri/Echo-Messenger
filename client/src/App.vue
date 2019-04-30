@@ -57,6 +57,7 @@
 
 <script>
 import Vue from "vue";
+import VueChatScroll from 'vue-chat-scroll'
 import {
   MdApp,
   MdDrawer,
@@ -67,7 +68,7 @@ import {
   MdContent,
   MdSubheader,
   MdDivider,
-  MdAvatar
+  MdAvatar,
 } from "vue-material/dist/components";
 
 Vue.use(MdApp);
@@ -80,6 +81,7 @@ Vue.use(MdContent);
 Vue.use(MdSubheader);
 Vue.use(MdDivider);
 Vue.use(MdAvatar);
+Vue.use(VueChatScroll)
 
 export default {
   name: "PersistentMini",
@@ -102,7 +104,8 @@ export default {
 <style lang="scss" scoped>
 //@import "~bulma/css/bulma.css";
 .md-app {
-  min-height: 1000px;
+  min-height: 700px;
+  max-height: 700px;
   //border: 1px solid rgba(#000, 0.12);
 }
 .nav_button {
