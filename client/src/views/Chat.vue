@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="md-layout">
-      <div class="md-layout-item md-size-20"></div>
+      <div class="md-layout-item md-size-20"><MessagePreviews/></div>
       <div class="md-layout-item"><Message/></div>
     </div>
   </div>
@@ -17,10 +17,12 @@ import {
 Vue.use(MdLayout);
 
 import Message from "@/components/Message.vue";
+import MessagePreviews from "@/components/MessagePreviews.vue";
 
 @Component({
   components: {
-    Message
+    Message,
+    MessagePreviews
   }
 })
 export default class Chat extends Vue {}
