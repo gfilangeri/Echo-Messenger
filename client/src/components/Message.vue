@@ -85,9 +85,23 @@ export default {
 .outgoing .time {
   left: 0;
 }
-
-.box-text {
+.incoming .box-text {
   background: #f0f2f4;
+  display: inline-block;
+  padding: 20px 15px;
+  padding-right: 50px;
+  font-size: 16px;
+  color: #535357;
+  border-radius: 7px;
+  max-width: 90%;
+  margin-top: 10px;
+  text-align: left;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.outgoing .box-text {
+  background: lightblue;
   display: inline-block;
   padding: 20px 15px;
   padding-right: 50px;
