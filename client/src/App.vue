@@ -57,6 +57,7 @@
 
 <script>
 import Vue from "vue";
+import VueChatScroll from 'vue-chat-scroll'
 import {
   MdApp,
   MdDrawer,
@@ -80,6 +81,7 @@ Vue.use(MdContent);
 Vue.use(MdSubheader);
 Vue.use(MdDivider);
 Vue.use(MdAvatar);
+Vue.use(VueChatScroll)
 
 export default {
   name: "PersistentMini",
