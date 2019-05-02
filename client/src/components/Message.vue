@@ -30,12 +30,20 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 import { APIConfig } from "@/utils/api.utils";
 export default {
   name: "Message",
+  props: ['chatId'],
   data: () => ({
     messages: [],
     newMessage: "",
-    chatId: 1,
+    //chatId: 1,
+    cId: 1,
     userId: 1
   }),
+  watch: {
+      chatId: function () {
+          this.cId = this.chatId;
+          this.getMessages();
+      }
+  },
   methods: {
     getDate(date: Date) {
       const formattedDate = moment(date).format("hh:mm");
@@ -43,7 +51,7 @@ export default {
     },
     getMessages() {
       axios
-        .get(APIConfig.buildUrl("/messages/" + this.chatId))
+        .get(APIConfig.buildUrl("/messages/" + this.cId))
         .then((response: AxiosResponse) => {
           this.messages = response.data;
           console.log("success");
@@ -75,9 +83,9 @@ export default {
     },
     
   },
-  mounted() {
-    console.log(this.$route.params.chatId)
-    this.chatId = Number(this.$route.params.chatId);
+  created() {
+    //console.log(this.$route.params.chatId)
+    //this.chatId = Number(this.$route.params.chatId);
     this.getMessages();
   }
 };
