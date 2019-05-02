@@ -3,21 +3,23 @@
     <md-toolbar :md-elevation="1">
       <span class="md-title">
         Chats
-        <button v-on:click="createChat"></button>
+        <md-button v-on:click="createChat" class="button">
+          <md-icon>add_circle_outline</md-icon>
+        </md-button>
       </span>
     </md-toolbar>
     <div class="viewport">
       <md-list class="md-double-line">
         <div v-for="(chat, index) in chats" v-bind:key="index">
           <router-link :to="{ name: 'message', params: { chatId: chat.id } }">
-          <md-button v-on:click="displayChat(chat.id)">
-            <md-list-item class="chat_section">
-              <md-icon>group</md-icon>
-              <span>
-                <md-subheader>{{chat.title}}</md-subheader>
-              </span>
-            </md-list-item>
-          </md-button>
+            <md-button v-on:click="displayChat(chat.id)">
+              <md-list-item class="chat_section">
+                <md-icon>group</md-icon>
+                <span>
+                  <md-subheader>{{chat.title}}</md-subheader>
+                </span>
+              </md-list-item>
+            </md-button>
           </router-link>
           <div class="divider">
             <md-divider></md-divider>
@@ -93,5 +95,9 @@ export default {
   margin: 10px 0 10px 0;
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   width: 100%;
+}
+
+.button {
+  text-align: right;
 }
 </style>
