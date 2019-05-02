@@ -1,8 +1,12 @@
 <template>
   <div class="screen">
     <div class="md-layout">
-      <div class="md-layout-item md-size-20 scroll"><MessagePreviews/></div>
-      <div class="md-layout-item"><Message/></div>
+      <div class="md-layout-item md-size-20 scroll">
+        <MessagePreviews v-on:chatUpdate="updateChat"/>
+      </div>
+      <div class="md-layout-item">
+        <Message v-bind:chatId="chatId"/>
+      </div>
     </div>
   </div>
 </template>
@@ -19,15 +23,23 @@ Vue.use(MdLayout);
 import Message from "@/components/Message.vue";
 import MessagePreviews from "@/components/MessagePreviews.vue";
 
-@Component({
+export default {
+  name: "Chat",
+  data: () => ({
+    chatId: 1
+  }),
   components: {
-    Message,
-    MessagePreviews
+    'Message' : Message,
+    'MessagePreviews': MessagePreviews
+  },
+  methods: {
+    updateChat(chatId) {
+      this.chatId = chatId;
+    }
   }
-})
-export default class Chat extends Vue {}
-
+}
 </script>
+
 
 <style lang="scss" scoped>
 .md-layout-item {
@@ -42,12 +54,12 @@ export default class Chat extends Vue {}
   }
 }
 
-.scroll{
-    overflow: scroll;
-    min-height: 625px;
+.scroll {
+  overflow: scroll;
+  min-height: 625px;
 }
 
-.screen{
-    overflow: hidden;
+.screen {
+  overflow: hidden;
 }
 </style>

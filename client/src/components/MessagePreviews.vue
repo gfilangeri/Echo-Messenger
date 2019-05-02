@@ -69,7 +69,8 @@ export default {
         });
     },
     displayChat(chatId: Number) {
-      console.log("displaying chat #" + chatId);
+      console.log("displaying chat #" + chatId)
+      this.$emit("chatUpdate", chatId);
     }
   },
   created() {
