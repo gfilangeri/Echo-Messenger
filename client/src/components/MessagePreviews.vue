@@ -3,7 +3,7 @@
     <md-toolbar :md-elevation="1">
       <span class="md-title">
         Chats
-        <md-button v-on:click="createChat" class="button">
+        <md-button class="button-group" v-on:click="createChat">
           <md-icon>add_circle_outline</md-icon>
         </md-button>
       </span>
@@ -90,6 +90,12 @@ export default {
   border: 1px solid rgba(#000, 0.12);
 }
 
+.button-group {
+  position: absolute;
+  right: 0px;
+  margin: 0;
+}
+
 .divider {
   display: block;
   margin: 10px 0 10px 0;
@@ -97,7 +103,4 @@ export default {
   width: 100%;
 }
 
-.button {
-  text-align: right;
-}
 </style>
