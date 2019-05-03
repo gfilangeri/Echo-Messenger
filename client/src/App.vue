@@ -47,17 +47,21 @@
           </router-link>
         </md-list>
       </md-app-drawer>
-
       <md-app-content>
         <router-view class="container"/>
       </md-app-content>
     </md-app>
+    <GoogleLogin :params="params" :onSuccess="onSuccess" :onFailure="onFailure">Login</GoogleLogin>
   </div>
 </template>
 
 <script>
 import Vue from "vue";
-import VueChatScroll from 'vue-chat-scroll'
+import Component from "vue-property-decorator";
+import axios from "axios";
+import APIConfig from "@/utils/api.utils";
+import VueChatScroll from "vue-chat-scroll";
+import { GoogleLogin, LoaderPlugin } from 'vue-google-login';
 import {
   MdApp,
   MdDrawer,
@@ -68,7 +72,7 @@ import {
   MdContent,
   MdSubheader,
   MdDivider,
-  MdAvatar,
+  MdAvatar
 } from "vue-material/dist/components";
 
 Vue.use(MdApp);
@@ -81,13 +85,27 @@ Vue.use(MdContent);
 Vue.use(MdSubheader);
 Vue.use(MdDivider);
 Vue.use(MdAvatar);
-Vue.use(VueChatScroll)
+Vue.use(VueChatScroll);
+Vue.use(GoogleLogin);
+ Vue.use(LoaderPlugin, {
+        client_id: "474603672707-4740n8g44qv4p7h8cm1h6dfp8afjp1t4.apps.googleusercontent.com"
+    });
+    Vue.GoogleAuth.then(auth2 => {
+        console.log(auth2.isSignedIn.get());
+    })
 
 export default {
-  name: "PersistentMini",
+  name: "App",
+  components: {
+    "GoogleLogin": GoogleLogin
+  },
   data: () => ({
     menuVisible: false,
-    active: null
+    active: null,
+    isLoggedIn: false,
+    params: {
+      client_id: "xxxxxx"
+    }
   }),
   methods: {
     toggleMenu() {
@@ -95,10 +113,23 @@ export default {
     },
     changeActive(num) {
       this.active = num;
+    },
+    getIsLoggedIn() {
+      this.isLoggedIn = !!this.$store.state.user;
+      return !!this.$store.state.user;
+    },
+    onSuccess(googleUser) {
+      console.log(googleUser);
+      console.log(googleUser.getBasicProfile());
+    },
+    onFailure() {
+      console.log("failed");
     }
+  },
+  created() {
+    this.getIsLoggedIn();
   }
 };
-
 </script>
 
 <style lang="scss" scoped>
@@ -125,11 +156,11 @@ export default {
 }
 
 .viewport {
-    width: 320px;
-    max-width: 100%;
-    display: inline-block;
-    vertical-align: top;
-    overflow: auto;
-    border: 1px solid rgba(#000, .12);
-  }
+  width: 320px;
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  overflow: auto;
+  border: 1px solid rgba(#000, 0.12);
+}
 </style>
