@@ -46,12 +46,20 @@
             </md-list-item>
           </router-link>
         </md-list>
+        <GoogleLogin
+          v-if="!isLoggedIn"
+          :params="params"
+          :onSuccess="onSuccess"
+          :onFailure="onFailure"
+        >Login</GoogleLogin>
+        <button v-else v-on:click="logout()">
+        <GoogleLogin :params="params" :logoutButton="true">Logout</GoogleLogin>
+        </button>
       </md-app-drawer>
       <md-app-content>
         <router-view class="container"/>
       </md-app-content>
     </md-app>
-    <GoogleLogin :params="params" :onSuccess="onSuccess" :onFailure="onFailure">Login</GoogleLogin>
   </div>
 </template>
 
@@ -61,7 +69,7 @@ import Component from "vue-property-decorator";
 import axios from "axios";
 import APIConfig from "@/utils/api.utils";
 import VueChatScroll from "vue-chat-scroll";
-import { GoogleLogin, LoaderPlugin } from 'vue-google-login';
+import { GoogleLogin, LoaderPlugin } from "vue-google-login";
 import {
   MdApp,
   MdDrawer,
@@ -87,24 +95,26 @@ Vue.use(MdDivider);
 Vue.use(MdAvatar);
 Vue.use(VueChatScroll);
 Vue.use(GoogleLogin);
- Vue.use(LoaderPlugin, {
-        client_id: "474603672707-4740n8g44qv4p7h8cm1h6dfp8afjp1t4.apps.googleusercontent.com"
-    });
-    Vue.GoogleAuth.then(auth2 => {
-        console.log(auth2.isSignedIn.get());
-    })
+Vue.use(LoaderPlugin, {
+  client_id:
+    "474603672707-4740n8g44qv4p7h8cm1h6dfp8afjp1t4.apps.googleusercontent.com"
+});
+// Vue.GoogleAuth.then(auth2 => {
+//   console.log(auth2.isSignedIn.get());
+// });
 
 export default {
   name: "App",
   components: {
-    "GoogleLogin": GoogleLogin
+    GoogleLogin: GoogleLogin
   },
   data: () => ({
     menuVisible: false,
     active: null,
-    isLoggedIn: false,
+    isLoggedIn: null,
     params: {
-      client_id: "xxxxxx"
+      client_id:
+        "474603672707-4740n8g44qv4p7h8cm1h6dfp8afjp1t4.apps.googleusercontent.com"
     }
   }),
   methods: {
@@ -114,20 +124,27 @@ export default {
     changeActive(num) {
       this.active = num;
     },
-    getIsLoggedIn() {
-      this.isLoggedIn = !!this.$store.state.user;
-      return !!this.$store.state.user;
-    },
     onSuccess(googleUser) {
       console.log(googleUser);
       console.log(googleUser.getBasicProfile());
+      this.isLoggedIn = true;
     },
     onFailure() {
       console.log("failed");
+    },
+    logout() {
+      console.log("hi");
+      this.isLoggedIn = false;
+      Vue.GoogleAuth.then(auth2 => {
+        console.log(auth2.isSignedIn.get());
+      });
     }
   },
   created() {
-    this.getIsLoggedIn();
+    Vue.GoogleAuth.then(auth2 => {
+      this.isLoggedIn = auth2.isSignedIn.get();
+      console.log(this.isLoggedIn);
+    });
   }
 };
 </script>
